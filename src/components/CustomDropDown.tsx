@@ -1,34 +1,37 @@
 import { MenuItem, TextField } from "@mui/material";
-import React from "react";
+import React, { forwardRef } from "react";
 
 type CustomDropDownProps = {
     label: string,
     name: string,
-    changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
     values : Array<{value : string,label : string}>,
-    currentValue : string
+    errorText?: string;
+    // changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    // currentValue : string
 }
 
-const CustomDropDownField = (props: CustomDropDownProps) => {
+const CustomDropDownField = forwardRef(({label, errorText, name, values, ...props }: CustomDropDownProps, ref) => {
     return (
         <TextField
+            {...props}
+            error={!!errorText}
+            helperText={errorText}
             select
-            label={props.label}
-            name={props.name}
-            onChange={props.changeHandler}
-            value={props.currentValue}
+            label={label}
+            name={name}
+            inputRef={ref}
 
-            variant={"outlined"}
-            size={"small"}
-            margin={"dense"}
+            variant="outlined"
+            size="small"
+            margin="dense"
         >
-            {props.values.map(option => (
+            {values.map(option => (
                 <MenuItem key={option.value} value={option.value}>
                     {option.label}
                 </MenuItem>
             ))}
         </TextField>
     );
-}
+});
 
 export default CustomDropDownField
