@@ -1,10 +1,11 @@
 import type User from '../models/User';
 
 interface UserRowProps {
-    user:          User;
+    user:     User;
+    onDelete: (id: number) => void;
 }
 
-const UserRow = ({user}: UserRowProps) => {
+const UserRow = ({user, onDelete}: UserRowProps) => {
   return (
     <tbody key={user.id}>
         <tr>
@@ -14,6 +15,7 @@ const UserRow = ({user}: UserRowProps) => {
             <td>{user.totalExpenses.toFixed(2)}</td>
             <td>{user.totalIncome .toFixed(2)}</td>
             <td>{user.totalBalance.toFixed(2)}</td>
+            <td><button onClick={() => onDelete(user.id != undefined ? user.id : -1)}>Deletar</button></td>
         </tr>
     </tbody>
   )

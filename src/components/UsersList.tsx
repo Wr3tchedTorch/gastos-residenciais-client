@@ -1,12 +1,38 @@
+import type { AxiosResponse } from 'axios';
 import useAxios from '../hooks/useAxios'
 import User from '../models/User'
 import UserRow from './UserRow'
+import { useEffect, useState } from 'react';
 
 interface ListProps {
-    users: User[] | null;    
+    users:    User[] | undefined;
+    setUsers: React.Dispatch<React.SetStateAction<User[] | undefined>>;
 }
 
-const List = ({users}: ListProps) => {    
+const List = ({users, setUsers}: ListProps) => {    
+    const {fetchData} = useAxios<AxiosResponse>({
+      url: "users",
+      method: "delete",
+      manual: true
+    });
+
+    const onDeleteUser = async (id: number) => {
+      if (id < 0)
+      {
+        return;
+      }
+
+      const params = new URLSearchParams();
+      params.append("id", id.toString());
+      
+      let response: AxiosResponse = await fetchData(params);
+
+      if (response && users && response.status == 200)     
+      {
+        setUsers(users.filter(u => u.id != id));
+      }
+    }
+
     return <table>
         <thead>
           <tr>
@@ -21,7 +47,7 @@ const List = ({users}: ListProps) => {
         </thead>
         {
             users?.map(u => {
-                return <UserRow user={u}/>
+                return <UserRow user={u} onDelete={onDeleteUser}/>
             })
         }
     </table>;
@@ -34,12 +60,20 @@ interface UsersResponse {
   users: User[] | null;
 }
 
-const UsersList = () => {
+const UsersList = () => {  
+  const [users, setUsers] = useState<User[]>();
   const {response, error, loading} = useAxios<UsersResponse>({
     url: "users",
     method: "get"
   });  
 
+  useEffect(() => {
+    if (response && response.users)
+    {
+      setUsers(response.users);
+    }
+  }, [response]);
+  
   if (error)
   {
     console.log(error);    
@@ -57,7 +91,7 @@ const UsersList = () => {
 
   return (
     <div>
-      <List users={response.users} />
+      <List users={users} setUsers={setUsers}/>
 
       <li>
         <ul>Despesas Totais: {response.totalExpenses.toFixed(2)}</ul>
