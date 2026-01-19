@@ -8,6 +8,7 @@ import CustomTextField from './CustomTextField';
 import useAxios from "../hooks/useAxios";
 import type User from "../models/User";
 import type { AxiosResponse } from "axios";
+import { useEffect } from "react";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: "#ffffff",
@@ -38,7 +39,7 @@ const UserForm = ({setUsers}: UserFormProps) => {
   const createUserFormSchema = z.object({
     name: z.string()
       .trim()
-      .regex(/^[A-Za-z\s]+$/i, "Somente letras e espaços são permitidos no nome")
+      .regex(/^[ \p{L}\s]+$/u, "Somente letras e espaços são permitidos no nome")      
       .min(2, "O nome é obrigatório e deve ter pelo menos 2 caracteres")
       .max(200, "O nome deve ter no máximo 200 caracteres"),
     age: z.string()
@@ -46,7 +47,7 @@ const UserForm = ({setUsers}: UserFormProps) => {
       message: "A idade deve ser um número positivo", 
     })
     .refine(( age ) => parseInt(age, 10) < 120, {
-      message: "Puxa vida! Ninguém vive tanto assim",
+      message: "Caramba! Ninguém vive tanto assim",
     })
     .refine(( age ) => !Number.isNaN(parseInt(age, 10) || age != undefined), {
       message: "A idade deve ser um número válido",
@@ -56,11 +57,10 @@ const UserForm = ({setUsers}: UserFormProps) => {
   type createUserFormData = z.infer<typeof createUserFormSchema>
 
   const { 
-    register,
     handleSubmit,
-    watch,
     control,
-    formState: { errors }
+    reset,    
+    formState: { errors, isSubmitSuccessful }
   } = useForm<createUserFormData>({
       resolver: zodResolver(createUserFormSchema),
       defaultValues: {
@@ -68,6 +68,12 @@ const UserForm = ({setUsers}: UserFormProps) => {
         age: ""
       }
   })
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
   
   const {fetchData} = useAxios<User>({
     url: "users",
