@@ -130,7 +130,7 @@ const CategoriesForm = ({setCategories}: CategoriesFormProps) => {
                 render={({ field, fieldState: { error } }) => (
                     <CustomDropDownField
                       {...field}
-                      label="Tipo de Despesa"
+                      label="Finalidade"
                       errorText={error?.message}
                       values={[
                         { value: "Ambas", label: "Ambas" },

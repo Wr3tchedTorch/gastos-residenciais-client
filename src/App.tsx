@@ -3,6 +3,7 @@ import './App.css'
 import UserManagement from './Pages/UserManagement';
 import React from 'react';
 import CategoryManagement from './Pages/CategoryManagement';
+import TransactionManagement from './Pages/TransactionManagement';
 
 function App() {
 
@@ -59,7 +60,7 @@ function App() {
         <CategoryManagement/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
+        <TransactionManagement />
       </CustomTabPanel>
     </>
   )
