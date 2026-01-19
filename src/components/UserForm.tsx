@@ -2,9 +2,12 @@ import { Typography, Paper, Button, Container, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import z from "zod";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/src/index.js";
 import CustomTextField from './CustomTextField';
+import useAxios from "../hooks/useAxios";
+import type User from "../models/User";
+import type { AxiosResponse } from "axios";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: "#ffffff",
@@ -27,7 +30,7 @@ const SubmitButton = styled(Button)({
   marginTop: "20px",
 });
 
-const Form = () => {
+const Form = () => {  
   const createUserFormSchema = z.object({
     name: z.string()
       .trim()
@@ -44,7 +47,7 @@ const Form = () => {
     .refine(( age ) => !Number.isNaN(parseInt(age, 10) || age != undefined), {
       message: "A idade deve ser um número válido",
     })
-  })
+  })  
 
   type createUserFormData = z.infer<typeof createUserFormSchema>
 
@@ -62,9 +65,29 @@ const Form = () => {
       }
   })
   
-  const onSubmit = (data:any) => {
-    console.log(data)
+  const {fetchData} = useAxios<User>({
+    url: "users",
+    method: "post",
+    manual: true
+  });  
+
+  interface UserForCreation {
+    Name: string;
+    Age:  number;
   }
+  
+  const onSubmit = async (data: any) => {
+    console.log(data)
+
+    const dataForCreation: UserForCreation = {
+      Name: data.name,
+      Age:  parseInt(data.age, 10)
+    };
+
+    let response: AxiosResponse = await fetchData(null, JSON.stringify(dataForCreation));
+
+    console.log(response);
+  }  
 
   return (
     <>

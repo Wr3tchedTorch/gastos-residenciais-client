@@ -16,16 +16,18 @@ const useAxios = <T,>({ url, method, body = null, headers = null, manual = false
     const [error, setError]       = useState<string>('');
     const [loading, setLoading]   = useState<boolean>(true);
     
-    const fetchData = useCallback(async (params: URLSearchParams | null = null) => {
+    const fetchData = useCallback(async (params: URLSearchParams | null = null, manualBody: string | null = null) => {
         setLoading(true);
         setError('');
+
+        let requestBody = body == null ? manualBody : body;
 
         try {
             const config: AxiosRequestConfig = {
                 url: url,
                 params,
                 method,
-                data: body ? JSON.parse(body) : null,
+                data: requestBody ? JSON.parse(requestBody) : null,
                 headers: headers ? JSON.parse(headers) : {},
             };
 
