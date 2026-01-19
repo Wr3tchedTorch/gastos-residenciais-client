@@ -1,8 +1,8 @@
-import { Typography, Paper, Button, Container, Grid } from "@mui/material";
+import { Typography, Paper, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import z from "zod";
-import { Controller, useForm, type SubmitHandler } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/src/index.js";
 import CustomTextField from './CustomTextField';
 import useAxios from "../hooks/useAxios";
@@ -30,7 +30,11 @@ const SubmitButton = styled(Button)({
   marginTop: "20px",
 });
 
-const Form = () => {  
+interface UserFormProps {
+  setUsers: React.Dispatch<React.SetStateAction<User[] | undefined>>;
+}
+
+const UserForm = ({setUsers}: UserFormProps) => {  
   const createUserFormSchema = z.object({
     name: z.string()
       .trim()
@@ -86,6 +90,13 @@ const Form = () => {
 
     let response: AxiosResponse = await fetchData(null, JSON.stringify(dataForCreation));
 
+    let newUser: User = response.data as User;
+    newUser.totalExpenses = 0;
+    newUser.totalIncome   = 0;
+    newUser.totalBalance  = 0;
+
+    setUsers(prev => [... (prev || []), response.data as User]);
+
     console.log(response);
   }  
 
@@ -136,4 +147,4 @@ const Form = () => {
   );
 }
 
-export default Form;
+export default UserForm;

@@ -1,30 +1,22 @@
-import useAxios from '../hooks/useAxios'
 import User from '../models/User'
 import { useEffect, useState } from 'react';
 import { Chip, Stack } from '@mui/material';
 import UsersTable from './UsersTable';
+import type { UsersResponse } from '../Pages/UserManagement';
 
-interface UsersResponse {
-  totalIncome:   number;
-  totalExpenses: number;
-  totalBalance:  number;
-  users: User[] | null;
+interface UsersListProps {
+  users:    User[] | undefined;
+  setUsers: React.Dispatch<React.SetStateAction<User[] | undefined>>;
+  response: UsersResponse | null;
 }
 
-const UsersList = () => {  
-  const [users, setUsers] = useState<User[]>();
+const UsersList = ({users, setUsers, response}: UsersListProps) => {  
   const [totalExpenses, setTotalExpenses] = useState<number>(0);
   const [totalIncome, setTotalIncome]     = useState<number>(0);
   const [totalBalance, setTotalBalance]   = useState<number>(0);
 
-  const {response, error, loading} = useAxios<UsersResponse>({
-    url: "users",
-    method: "get"
-  });  
-
   useEffect(() => {
-    console.log("retriggering response");
-    
+    console.log("retriggering response");    
 
     if (!response)
     {
@@ -40,15 +32,6 @@ const UsersList = () => {
     setTotalBalance(response.totalBalance);
 
   }, [response]);
-  
-  if (error)
-  {
-    console.log(error);    
-  }
-
-  if (loading) {
-    return <p>Loading...</p>;  
-  }
 
   if (!response)
   {
