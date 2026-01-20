@@ -3,6 +3,7 @@ import type { ExpenseType } from '../constants/ExpenseType';
 import type { UniqueExpenseType } from '../constants/UniqueExpenseType';
 import useAxios from '../hooks/useAxios';
 import TransactionsList from '../components/TransactionsList';
+import TransactionsForm from '../components/TransactionsForm';
 
 export interface UserSummaryResponse {
     id: number;
@@ -52,7 +53,7 @@ const TransactionManagement = () => {
 
     return (
         <div>
-            {/* <UserForm setUsers={setUsers}/> */}
+            <TransactionsForm setTransactions={setTransactions}/>
 
             <TransactionsList transactions={transactions} setTransactions={setTransactions}/>
         </div>
