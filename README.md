@@ -6,7 +6,8 @@
   * [Backend](#backend)
   * [Stack utilizada](#stack-utilizada)
   * [Instalação](#instalação)
-  * [Documentação](#documentação)
+  * [Detalhes Técnicos](#detalhes-técnicos)
+  * [Screenshots](#screenshots)
   * [Licença](#licença)
 
 ## Descrição do Projeto
@@ -55,7 +56,7 @@ NOTA: O aplicativo não funcionará sem o backend estar em execução, um guia p
 
 [Link do README do backend](https://github.com/Wr3tchedTorch/gastos-residenciais-server/blob/master/README.md)
 
-## Documentação
+## Detalhes Técnicos
 
 Este projeto foi desenvolvido em TypeScript para garantir mais legibilidade e organização no código. Que permite uma melhor manutenabilidade do software, já que a tipagem estática do TypeScript permite um código mais robusto e reduz a taxa de erros.
 
@@ -63,7 +64,20 @@ O framework utilizado foi o React. Por ser uma ferramenta poderosa e moderna, el
 
 Também foram utilizadas bibliotecas para otimizar o desenvolvimento, como: Axios, para requisições HTTP; e a Material UI, para o design de componentes como as tabelas e os formulários.
 
+## Screenshots
+
+### Tela de visualização e cadastro dos usuários:
+
+<img src="./public/readme/screenshot_1.png" alt="Tela com formulario para cadastro e tabela listando os usuários" style="width:1200px; margin: auto; display: block"/>
+
+### Tela de visualização e cadastro de categorias
+
+<img src="./public/readme/screenshot_2.png" alt="Tela com formulario para cadastro e tabela listando as categorias" style="width:1200px; margin: auto; display: block"/>
+
+### Tela de visualização e cadastro de transações
+
+<img src="./public/readme/screenshot_3.png" alt="Tela com formulario para cadastro e tabela listando as transações" style="width:1200px; margin: auto; display: block"/>
+
 ## Licença
 
 [GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/)
-
