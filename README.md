@@ -8,7 +8,11 @@
   * [Instalação](#instalação)
   * [Detalhes Técnicos](#detalhes-técnicos)
   * [Screenshots](#screenshots)
-  * [Licença](#licença)
+    + [Tela de visualização e cadastro dos usuários](#tela-de-visualização-e-cadastro-dos-usuários)
+    + [Tela de visualização e cadastro de categorias](#tela-de-visualização-e-cadastro-de-categorias)
+    + [Tela de visualização e cadastro de transações](#tela-de-visualização-e-cadastro-de-transações)
+  * [Licença](#licen-a)
+
 
 ## Descrição do Projeto
 Esse repositório armazena o código-fonte do frontend (ou seja, o *client*) para um aplicativo web de gerenciamento de gastos residênciais. 
@@ -66,7 +70,7 @@ Também foram utilizadas bibliotecas para otimizar o desenvolvimento, como: Axio
 
 ## Screenshots
 
-### Tela de visualização e cadastro dos usuários:
+### Tela de visualização e cadastro dos usuários
 
 <img src="./public/readme/screenshot_1.png" alt="Tela com formulario para cadastro e tabela listando os usuários" style="width:1200px; margin: auto; display: block"/>
 
