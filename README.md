@@ -1,73 +1,69 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Website para gastos residenciais
 
-Currently, two official plugins are available:
+### Sumário
+  * [Descrição do Projeto](#descrição-do-projeto)
+  * [Backend](#backend)
+  * [Stack utilizada](#stack-utilizada)
+  * [Instalação](#instalação)
+  * [Documentação](#documentação)
+  * [Licença](#licença)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Descrição do Projeto
+Esse repositório armazena o código-fonte do frontend (ou seja, o *client*) para um aplicativo web de gerenciamento de gastos residênciais. 
 
-## React Compiler
+Atráves do aplicativo é possivel adicionar, visualizar e remover dados das entidades:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Usuário, possui informações de nome, idade e transações vinculadas. 
+- Categória, possui uma descrição e o tipo de despesa.
+- Transação, armazena uma descrição, valor, finalidade (Receita ou Despesa), categória e usuário.
 
-## Expanding the ESLint configuration
+## Backend
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Além do frontend, também foi desenvolvido um projeto de backend em .NET. Que também tem um guia de detalhes técnicos e instalação: 
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+[Link para o Repositório do backend.](https://github.com/Wr3tchedTorch/gastos-residenciais-server)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Stack utilizada
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Front-end:** React, TypeScript, Vite, Axios, Material UI.
+
+**Back-end:** .NET, C#, EF Core, Mapster, MySql.
+
+## Instalação
+
+1. Clone o repositório ou faça download do código-fonte:
+
+```bash
+  git clone https://github.com/Wr3tchedTorch/gastos-residenciais-client
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. No diretório principal (onde o arquivo package.json está localizado), rode os seguintes comandos:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+  npm i
 ```
+
+```bash
+  npm run dev
+```
+Depois que o segundo comando finalizar sua execução, o projeto estará funcionando. Nesse ponto é só abrir a URL do projeto no navegador:
+
+http://localhost:5173/
+
+NOTA: O aplicativo não funcionará sem o backend estar em execução, um guia para instalar e executar o backend pode ser encontrado no link:
+
+[Link do README do backend](https://github.com/Wr3tchedTorch/gastos-residenciais-server/blob/master/README.md)
+
+## Documentação
+
+Este projeto foi desenvolvido em TypeScript para garantir mais legibilidade e organização no código. Que permite uma melhor manutenabilidade do software, já que a tipagem estática do TypeScript permite um código mais robusto e reduz a taxa de erros.
+
+O framework utilizado foi o React. Por ser uma ferramenta poderosa e moderna, ele garante que o aplicativo seja performático e eficiente. Aproveitando ao máximo os recursos disponíveis por meio de técnicas de renderização e cache.
+
+Também foram utilizadas bibliotecas para otimizar o desenvolvimento, como: Axios, para requisições HTTP; e a Material UI, para o design de componentes como as tabelas e os formulários.
+
+## Licença
+
+[GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/)
+

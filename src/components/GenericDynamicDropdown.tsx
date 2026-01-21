@@ -1,7 +1,5 @@
-import React from 'react'
 import { Controller, type Control } from 'react-hook-form';
 import CustomDropDownField from './CustomDropDown';
-import useAxios from '../hooks/useAxios';
 
 interface GenericDynamicDropdownProps<T> {
     items: T[];
